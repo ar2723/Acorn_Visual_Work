@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Step03_Document2.html</title>
+      <style>
+            p {
+                  color: blue;
+            }
+            .box {
+                  width: 100px;
+                  height: 100px;
+                  background-color: yellow;
+                  cursor: pointer;
+                  transition: margin-left 0.4s ease-out;
+            }
+      </style>
+</head>
+<body>
+      <h1>인라인 css 테스트</h1>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore quaerat dolore reiciendis aut cumque accusantium, quas natus sit ullam eum est totam porro. Reiciendis alias dolor porro inventore quos debitis!</p>
+      <div class="box" onclick="MoveLeft()">눌러보셈</div>
+
+      <script>
+            // 실행 code를 함수안에 준비해둔다.
+            let MoveLeft = () => {
+                  let box = document.querySelector(".box");
+                  if(box.style.marginLeft === "0px"){
+                       box.style.marginLeft = "100px"
+                  } else {
+                        box.style.marginLeft = "0px"
+                  }
+            }
+      </script>
+</body>
+</html>

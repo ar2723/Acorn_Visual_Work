@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Step05_example3.html</title>
+</head>
+<body>
+      <h1>다중 if문 테스트</h1>
+      <input type="text" id="jumsu" placeholder="점수 입력...">
+      <button onclick="check()">확인하기</button>
+      <p>
+                  <strong id="result"></strong>학점 입니다.
+      </p>
+      <script>
+                  /*
+                        input 요소에 점수를 입력하고 확인하기 버튼을 눌렀을 때
+                        점수가 90점 이상이면 "A"
+                        80점 이상이면 "B"
+                        70점 이상이면 "C"
+                        60점 이상이면 "D"
+                        그 이외의 경우에는 "F"라는 문자열을
+                        id가 result 인 곳의 innerText로 출력해보세요
+                  */
+
+            let check = () =>{
+                  let score = document.querySelector("#jumsu").value;
+                  if(score >= 90 ){
+                        document.querySelector("#result").innerText = "A"
+                  } else if (score >= 80 ){
+                        document.querySelector("#result").innerText = "B"
+                  } else if (score >= 70 ){
+                        document.querySelector("#result").innerText = "C"
+                  } else if (score >= 60 ){
+                        document.querySelector("#result").innerText = "D"
+                  } else {
+                        document.querySelector("#result").innerText = "F"
+                  };
+                  // 만약에 else 가 없으면, 이 조건문에서 수행되는 코드 블럭이 하나도 존재하지 않을 수도 있다.
+                  // else가 존재하게 되면 한 코드 블럭만 수행하고 바로 빠져나오게 된다.
+                  // else는 default 수행 코드 블럭이라고 볼 수 있다.
+            };
+      </script>
+</body>
+</html>

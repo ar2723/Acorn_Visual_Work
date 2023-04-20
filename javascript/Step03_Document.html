@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Step03_Document.html</title>
+</head>
+<body>
+      <h1>document obejct 사용해 보기</h1>
+      <button id="changebutton" onclick="changeH1Text()">바꾸기</button>
+      
+      <p id="one" onmouseover="changeP1Text()">p1</p>
+      <p class="my-class">p2</p>
+      <p class="my-class">p3</p>
+      <input type="text" id="two">
+      <button onclick="send()">전송 &rarr; </button>
+      <input type="text" id="three">
+         
+      <script>
+            //h1 요소의 innerText를 특정 버튼(바꾸기)을 눌렀을 때 바꾸고 싶다.
+            let changeH1Text= () => {
+                  let btn = document.querySelector("#changebutton")
+                  if(btn.innerText === "바꾸기"){
+                        document.querySelector("h1").innerText = "오잉?"
+                        btn.innerText = "되돌리기"
+                  } else {
+                        btn.innerText = "바꾸기"
+                        document.querySelector("h1").innerText = "document obejct 사용해 보기"
+                  }
+            }
+
+            //p1에 mouseover가 되었을때 innerText를 "마우스가 올라왔네?"라고 변경되도록 프로그래밍 해보기.
+            let changeP1Text = () => {
+                  document.querySelector("#one").innerText = "마우스가 올라왔네?"
+            } 
+            //input#two에 입력된 값을 input#three로 옮기기
+            /*
+            아래 send() 함수와 send3() 함수의 결정적인 차이는
+            document.querySelector("#three").value에 msg 변수에 담긴 값이 대입된다는 것이다.
+            */
+            let send = () => {
+                  let msg = document.querySelector("#two").value; // msg에 현재 입력한 값이 들어감
+                  document.querySelector("#three").value = msg;
+            }
+            
+            let send2 = () => {
+                  document.querySelector("#three").value = document.querySelector("#two").value;
+            }
+
+            let send3 = () => {
+                  let inputTwo = document.querySelector("#two").value; // inputTwo에는 현재 입력한 값이 들어감
+                  let inputThree = document.querySelector("#three").value; // inputThree에는 빈 값이 들어감
+                  inputThree = inputTwo; // inputThree라는 저장 공간에 현재 입력한 값이 들어감
+            }
+
+      </script>
+</body>
+</html>

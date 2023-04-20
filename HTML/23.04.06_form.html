@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23.04.06_form.html</title>
+    <style>
+        .container {
+            border: 3px solid rgb(77, 172, 90);
+            border-radius: 20px;
+            width: 768px;
+            margin: 0;
+            padding: 10px;
+            height: 650px;
+        }
+        textarea {
+            width: 100%;
+            height: 300px;
+            border: 2px solid rgb(77, 172, 90);
+        }
+        h1 {
+            text-align: center;
+            background-color: rgb(77, 172, 90);
+            color: white;
+            border-radius: 20px;
+        }
+        legend {
+            text-align: center;
+        }
+        .gender {
+            width: 200px;
+            text-align: center;
+        }
+        .school {
+            width: 400px;
+            text-align: center;
+        }
+        span {
+            font-weight: bold;
+            font-size: 17px;
+        }
+        .basicinfo {
+            list-style-type: none;
+            margin: 0 auto;
+        }
+
+        .basicinfo > li {
+            float: left;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        select {
+            width: 100px;
+            text-align: center;
+            font-size: 17px;
+            border: 1px solid navy;
+            font-weight: bold;
+        }
+        input{
+            height: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>영어 캠프 신청</h1>
+        <form action="signup.jsp">
+        
+        <ul class="basicinfo">
+            <li>
+                <label for="name"><span>이름</span></label>
+                <input type="text" id="name" name="name">
+            </li>
+            <li>
+                <label for="grade" class="grade"><span>학년</span></label>
+                <select name="grade" id="grade">
+                    <optgroup label="학년">
+                        <option>1학년</option>
+                        <option>2학년</option>
+                        <option>3학년</option>
+                    </optgroup>
+                </select>
+            </li>
+            <li>
+                <label for="email"><span>3.이메일 주소</span></label>
+                <input type="text" id="email" name="email">
+            </li>
+        </ul>
+            <br>
+        <div>
+            <ul class="basicinfo">
+                <li>
+                    <fieldset class="gender">
+                        <legend><span>성별</span></legend>
+                        <label>
+                            <input type="radio" name="gender" value="man" checked> 남학생
+                        </label>
+                        <label>
+                            <input type="radio" name="gender" value="woman"> 여학생
+                        </label>
+                    </fieldset>
+                </li>
+                <li>
+                    <fieldset class="school">
+                        <legend><span>학교 유형</span></legend>
+                        <label>
+                            <input type="radio" name="school" value="normal">일반고
+                        </label>
+                        <label>
+                            <input type="radio" name="school" value="private">자사고
+                        </label>
+                        <label>
+                            <input type="radio" name="school" value="skilled">특성화고
+                        </label>
+                        <label>
+                            <input type="radio" name="school" value="special">특목고
+                        </label>
+                    </fieldset>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <label for="level"><span>영어 수준</span></label>
+            <select name="level" id="level">
+                <option value="">선택</option>
+                <option value="programmer">최상</option>
+                <option value="doctor">상</option>
+                <option value="pianist">중</option>
+                <option value="etc">하</option>
+            </select>
+        </div>
+            <br>
+        <div>
+            <label for="comment"><span>캠프 진행간 부탁할 부분 (건강 상태, 방배정 등등)</span></label>
+            <textarea name="comment" id="comment"></textarea>
+        </div>
+            <button type="submit">제출</button>
+        </form>
+    </div>
+</body>
+</html>

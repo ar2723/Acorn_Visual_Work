@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Step06_example3.html</title>
+      <style>
+            .box {
+                  width: 100px;
+                  height: 100px;
+                  border: 1px solid red;
+                  background-color: yellow;
+                  cursor: pointer;
+                  transition: margin-left 0.4s ease-in-out;
+            }
+            .box2 {
+                  width: 100px;
+                  height: 100px;
+                  border: 1px solid red;
+                  background-color: yellow;
+                  cursor: pointer;
+                  transition: margin-left 0.4s ease-in-out;
+            }
+      </style>
+</head>
+<body>
+      <div class="box">div1</div>
+      <div class="box">div2</div>
+      <div class="box">div3</div>
+      <div class="box">div4</div>
+      <div class="box">div5</div>
+
+      <div class="box2">div6</div>
+      <div class="box2">div7</div>
+      <div class="box2">div8</div>
+      <div class="box2">div9</div>
+      <div class="box2">div10</div>
+      <input type="button" onclick="reset()" value ="reset">
+      <script>
+            (()=>{
+                  let box2 = document.querySelectorAll(".box2");
+                  box2.forEach(
+                        (item) => {
+                              let mleft2 = 0
+                              item.addEventListener("click",
+                                    (event) => {
+                                          mleft2 = mleft2 + 100
+                                          event.target.style.marginLeft = mleft2 + "px"
+                                    }
+                              )
+                        }
+                  )
+            }
+            )();
+                  let mleft = [0, 0, 0, 0, 0]
+                  
+                  for (let i = 0; i < 5 ; i++){ 
+                        let box = document.querySelectorAll(".box");
+                        //margin-left 값을 저장할 변수를 만들고 초기값 0부여
+                        box[i].addEventListener("click",
+                              (event)=>{
+                                    mleft[i] = mleft[i] + 100
+                                    //click 이벤트가 발생한 바로 그 요소의 margin-left 값을 변경시키기
+                                    event.target.style.marginLeft =  mleft[i] + "px";
+                              }
+                        );
+                  }
+                  let reset = () => {
+                        for (let i = 0; i < 5 ; i++){
+                        document.querySelectorAll(".box")[i].style.marginLeft = "0px"
+                        }
+                        mleft = [0, 0, 0, 0, 0]
+                  }
+      </script>
+</body>
+</html>

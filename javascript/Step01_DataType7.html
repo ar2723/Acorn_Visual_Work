@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Step06_DataType7.html</title>
+</head>
+<body>
+      <h1>javascript 데이터 type</h1>
+      <p><strong>function</strong> type</p>
+      <script>
+            // function type을 만드는 방법은 3가지가 있다.
+
+            //1. 이름이 있는 함수를 만든다.
+            function greet(){
+                  console.log("안녕하세요!");
+            }; //<- 여기에 세미콜론은 생략이 가능하다, 사실 모든 부분에서 가능하지만 다른 언어에서는 쓰이기 때문에 붙이는 습관을 들이자
+
+            //2. 이름이 없는 함수를 만들어서 변수에 대입. 한번 만들어진 익명함수에 이름을 지정하는 것은 불가능하다.
+            //대신 이 함수를 호출할 때 함수명 대신 변수명을 사용하며, 이때 변수명을 통해 호출되었다 하더라도 함수는 여전히 익명함수이다.
+            let greet2=function(){
+                  console.log("안녕하세요! 2");
+            };
+
+            //3. 이름이 없는 함수를 간략히(화살표 함수) 만들어서변수에 대입
+            let greet3 = ()=>{
+                  console.log("안녕하세요! 3");
+            };
+
+            //undefined에 대한 이해 -> undefined 또한 데이터 타입 중 하나이며, 값 또한 undefined이다.
+
+            //변수를 선언만 하고 초기 값을 넣지 않으면 undefined가 들어있다.
+            let a;
+            //undefined는 undefined type이다.
+            let b = undefined;
+      </script>
+</body>
+</html>
