@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Step07_createElement3.html</title>
+</head>
+<body>
+      <input type="text" id="inputMsg" placeholder="메세지 입력...">
+      <button id="sendBtn">전송</button>
+      <ul id="msgList">
+            <li>하나</li>
+            <li>두울</li>
+      </ul>
+      <script>
+            const sendMsg = document.querySelector("#sendBtn")
+            sendMsg.addEventListener("click", 
+                  () => {
+                        const inputVal = document.querySelector("#inputMsg");
+                        const li = document.createElement("li")
+                        li.innerText = inputVal.value
+                        document.querySelector("#msgList").append(li);
+                  }
+            )
+
+      </script>
+</body>
+</html>
