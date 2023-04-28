@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Step08_Array4.html</title>
+</head>
+<body>
+      <h1> .map() .filter() .sort() 활용</h1>
+      <script>
+            let nums = [-30, 10, -20, 20, 30];
+
+            /*
+                  1. 위 배열의 모든 item에 25를 다힌 배열을 얻어내고
+                  2. 양의 정수만 남긴 배열을 얻어내고
+                  3. 오름차순으로 정렬하기
+            */
+
+            let result = nums.map( item => item+25)
+                              .filter(item => item > 0)
+             //sort((a, b) => a-b) -> a-b 값이 음수가 나오면 자리를 바꾸지 않고, 양수가 나오면 자리를 바꾸지 않는 매커니즘이다.
+            // 오름차순을 할때는 a-b, 내림차순을 할때는 b-a를 하면 된다.
+                              .sort((a, b) => {
+                                    let c = a-b;
+                                    console.log("a:"+a+" b"+b+" a-b:"+c)
+                                    return c;
+                                    }
+                              );
+
+            //핸드폰 목록
+            let phones=[
+                  {name: "iphone 10", price: 50},
+                  {name: "android", price: 20},
+                  {name: "갤럭시 S5", price: 30},
+                  {name: "iphone 13", price: 100},
+                  {name: "갤럭시 10", price: 80}
+            ];
+
+            /*
+                  위의 핸드폰 목록에서 가격이 50 이상인 핸드폰 정보만 담은 배열을 얻어내고
+                  해당 배열의 아에팀을 핸드폰 가격에 대해서 오름차순 정렬되도록 해보세요.
+            */
+
+            let result2 = phones.filter(item => item.price > 50).sort((a, b) => a.price-b.price)
+            
+      </script>
+</body>
+</html>
