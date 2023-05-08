@@ -43,8 +43,6 @@
 
             //snipe의 좌표
             let snipeX = 0, snipeY = 0;
-            //총알 구멍의 임시 좌표
-            let holeX = 0, holeY = 0;
             //총알 구멍 객체가 저장되는 배열
             const bullets = [];
             //토끼의 좌표
@@ -53,12 +51,14 @@
             let rabbitIndex = 0;
             //카운트를 셀 변수
             let count = 0;
+            //효과음 로딩하기
+            const fireSound=new Audio("sounds/fire.wav");
+            const dieSound=new Audio("sounds/birddie.mp3");
 
             setInterval(
                   () => {
                         //함수가 호출될 때마다 count를 1씩 증가시킨다
                         count++;
-
                         //여기 함수 내부는 1/100초 마다 한번씩 실행된다.
                         // context.clearRect(0, 0, 800 , 500);
                         // 배경이미지를 canvas 의 크기에 맞게 그린다.
@@ -79,8 +79,9 @@
                         //함수가 20번 호출될 때
                         if(count%20 == 0){
                               //여기는 한번만 실행된다
-                              rabbitIndex++;
                               //토끼 이미지 인텍스 1 증가시키기
+                              rabbitIndex++;
+                              //만일 존재하지 않는 인덱스라면 0 으로 초기화 하기
                               if (rabbitIndex == 2){
                                     rabbitIndex = 0;
                               }
@@ -91,8 +92,8 @@
                         // 우연히 10이 나올때만 (확률상 1초에 1번꼴)
                         if(ranNum == 10){
                               //토끼를 랜덤한 위치로 움직이게 하기
-                              rabbitX = Math.random()*700 + 5;
-                              rabbitY = Math.random()*400 + 5;
+                              rabbitX = Math.random()*700 + 50;
+                              rabbitY = Math.random()*400 + 50;
                         }
                   
                   }
@@ -104,16 +105,37 @@
                         //이벤트가 발생한 곳의 canvas 내에서의 좌표
                         snipeX = event.offsetX ;
                         snipeY = event.offsetY ;
-                        //지정된 사각형 영역을 지우기 clearRect(x, y, width, height);
                         //여기서 snipeX, snipeY 값은 좌상단의 기준점
                   }
             )
             canvas.addEventListener("mousedown",
                   (event) => {
-                        //이벤트가 발생한 곳의 좌표를 object에 담는다.
-                        const holes = {x : event.offsetX, y : event.offsetY}
+                        //mousedown 이벤트가 발생한 곳의 좌표를 변수에 담아놓고 아래에서 2번 활용하기
+                        let x = event.offsetX
+                        let y = event.offsetY
+
+                        const hole={x:x, y:y};
                         //좌표 object를 배열에 누적시킨다
-                        bullets.push(holes)
+                        bullets.push(hole)
+                        //재생 위치를 처음으로 리셋후
+                        fireSound.currentTime = 0;
+                         //총소리를 재생하면 빠르게 마우스를 눌러도 연속 재생이 된다.
+                        fireSound.play();
+                        //토끼가 총에 맞았는지 판별해서 맞았으면 효과음 재생
+
+                        //토끼가 총에 맞았는지 여부
+
+                        let isRabbitDie = 
+                              x > rabbitX-50 &&
+                              x < rabbitX+50 &&
+                              y > rabbitY-50 &&
+                              y < rabbitY+50;
+                              
+                        if(isRabbitDie){
+                              dieSound.currentTime=0;
+                              dieSound.play();
+                        }
+
                   }
             )
       </script>
