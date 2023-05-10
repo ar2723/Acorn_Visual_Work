@@ -13,6 +13,7 @@
 </head>
 <body>
       <h1>canvas 요소 활용해보기</h1>
+      <p> 잡은 점수 : <strong id="point">0</strong></p>
       <!-- canvas 요소는 width와 height를 속성으로 직접 지정할 수 있다. -->
       <canvas id="myCanvas" width="800" height="500"></canvas>
       <script>
@@ -33,11 +34,9 @@
             //토끼 이미지 로딩
             const rabbitImg1 = new Image();
             rabbitImg1.src = "images/rabbit_1.png";
-
             const rabbitImg2 = new Image();
             rabbitImg2.src = "images/rabbit2.png";
-
-            //로딩된 이미지를 배열에 담아 높는다 (나중에 애니메이션 효과를 주기 위해)
+            //로딩된 토끼 이미지를 배열에 담아 높는다 (나중에 애니메이션 효과를 주기 위해)
             const rabbitImgs = [rabbitImg1, rabbitImg2];
             
 
@@ -51,6 +50,8 @@
             let rabbitIndex = 0;
             //카운트를 셀 변수
             let count = 0;
+
+
             //효과음 로딩하기
             // new Audio에서 Audio는 함수지만 자바에서의 클래스라고 생각해도 무방하다.
             // Audio 클래스를 통해 객체를 생성해서 객체 메소드를 사용하게 되는 것이다.
@@ -71,14 +72,27 @@
             //풍선의 정보를 저장할 배열
             const bubbles = [];
 
+            //글자의 크기, 글꼴
+            context.font ="20px consolas";
+            //글자의 색상
+            context.fillStyle = "yellow";
+
+
             setInterval(
                   () => {
                         //함수가 호출될 때마다 count를 1씩 증가시킨다
                         count++;
-                        //여기 함수 내부는 1/100초 마다 한번씩 실행된다.
+
                         // context.clearRect(0, 0, 800 , 500);
+
                         // 배경이미지를 canvas 의 크기에 맞게 그린다.
                         context.drawImage(backImg, 0, 0, 800, 500);
+
+                        //스나이프그리기
+                        context.drawImage(snipeImg, snipeX - 50, snipeY - 50, 100, 100);
+
+                        //글자 출력하기 .fillText (글 내용, 좌하단의 x, 좌하단의 y)
+                        context.fillText("점수 : " + score*100, 10, 30);
                         
                         //총알 구멍 이미지를 반복문을 돌면서 모두 그린다.
                         for(let i = 0; i < bullets.length; i++){
@@ -90,6 +104,27 @@
                         //토끼 그리기
                         context.drawImage(rabbitImgs[rabbitIndex], rabbitX - 50, rabbitY - 50, 100, 100);
 
+                        //토끼를 그릴 때 애니메이션 효과 주기
+                        if(count%20 == 0){
+                              //함수가 20번 호출될 때 여기는 한번만 실행된다
+                              //토끼 이미지 인텍스 1 증가시키기
+                              rabbitIndex++;
+                              //만일 존재하지 않는 인덱스라면 0 으로 초기화 하기
+                              if (rabbitIndex == 2){
+                                    rabbitIndex = 0;
+                              }
+                        }
+
+                        //토끼가 화면상에서 랜덤한 위치로 돌아다니게 하기
+                        // 0에서 99 사이의 랜덤한 정수를 얻어내서
+                        let ranNum = parseInt(Math.random()*100)
+                        // 우연히 10이 나올때만 (확률상 1초에 1번꼴)
+                        if(ranNum == 10){
+                              //토끼를 랜덤한 위치로 움직이게 하기
+                              rabbitX = Math.random()*700 + 50;
+                              rabbitY = Math.random()*400 + 50;
+                        }
+
                         //풍선 그리기
                         for(let i = 0; i < bubbles.length; i++){
                               //i번째 풍선 정보를 가지고 있는 object를 참조해서
@@ -99,32 +134,28 @@
                               //풍선 움직이기
                               tmp.bubbleX += tmp.speedX;
                               tmp.bubbleY += tmp.speedY;
+                              //위에서 움직인 직후 풍선이 화면을 벗어 났는지 판별해서
+                              let isOut = tmp.bubbleX < -25 ||
+                                          tmp.bubbleX > 825 ||
+                                          tmp.bubbleY < -25 ||
+                                          tmp.bubbleY > 525;
+
+                              //만일 벗어 났다면
+                              tmp.isOut = isOut;
                         }
 
-
-                        //스나이프그리기
-                        context.drawImage(snipeImg, snipeX - 50, snipeY - 50, 100, 100);
-                        
-                        //함수가 20번 호출될 때
-                        if(count%20 == 0){
-                              //여기는 한번만 실행된다
-                              //토끼 이미지 인텍스 1 증가시키기
-                              rabbitIndex++;
-                              //만일 존재하지 않는 인덱스라면 0 으로 초기화 하기
-                              if (rabbitIndex == 2){
-                                    rabbitIndex = 0;
+                        //풍선 체크하기 (화면을 벗어난 풍선은 제거하기)
+                        for(let i = 0 ; i < bubbles.length; i++){
+                              let tmp = bubbles[i];
+                              //만일 i번째 풍선이 화면을 벗어 났다면
+                              if(tmp.isOut){
+                                    //bubbles 배열에서 i번째 방에서부터 1개 잘라내기 (삭제하기)
+                                    bubbles.splice(i, 1);
                               }
                         }
-
-                        // 0에서 99 사이의 랜덤한 정수를 얻어내서
-                        let ranNum = parseInt(Math.random()*100)
-                        // 우연히 10이 나올때만 (확률상 1초에 1번꼴)
-                        if(ranNum == 10){
-                              //토끼를 랜덤한 위치로 움직이게 하기
-                              rabbitX = Math.random()*700 + 50;
-                              rabbitY = Math.random()*400 + 50;
-                        }
+                        
                   }
+            //여기 함수 내부는 1/100초 마다 한번씩 실행된다.
             , 10);
 
             //canvas 요소의 mousemove 이벤트 처리
@@ -136,6 +167,10 @@
                         //여기서 snipeX, snipeY 값은 좌상단의 기준점
                   }
             )
+
+            //잡은 토끼의 갯수를 저장할 변수를 선언하고 초기값 0 대입
+            let score = 0;
+
             canvas.addEventListener("mousedown",
                   (event) => {
                         //mousedown 이벤트가 발생한 곳의 좌표를 변수에 담아놓고 아래에서 2번 활용하기
@@ -143,16 +178,20 @@
                         let y = event.offsetY
 
                         const hole={x:x, y:y};
+
                         //좌표 object를 배열에 누적시킨다
                         bullets.push(hole)
+
                         //재생 위치를 처음으로 리셋후
                         fireSound.currentTime = 0;
-                         //총소리를 재생하면 빠르게 마우스를 눌러도 연속 재생이 된다.
+                        //총소리를 재생하면 빠르게 마우스를 눌러도 연속 재생이 된다.
+
                         fireSound.play();
                         //토끼가 총에 맞았는지 판별해서 맞았으면 효과음 재생
 
                         //토끼가 총에 맞았는지 여부
                         let isRabbitDie = 
+                              //토끼 이미지의 크기가 100이기 때문에 좌표 기준 각각 너비와 폭만큼의 범위를 설정
                               x > rabbitX-50 &&
                               x < rabbitX+50 &&
                               y > rabbitY-50 &&
@@ -162,6 +201,7 @@
                               dieSound.currentTime=0;
                               dieSound.play();
                               
+                              //토끼를 총으로 맞췄을 때 = 토끼가 죽었을 때에 맞춰서 풍선을 생성
                               //여기서 풍선 6개 만들기
                               for (let i = 0; i < 6; i++){
                                     //새로운 object를 하나 만들어서
@@ -170,11 +210,20 @@
                                     tmp.bubbleX = rabbitX;
                                     tmp.bubbleY = rabbitY;
                                     tmp.bubbleIndex = i;
-                                    tmp.speedX = Math.random()*20 - 10;
-                                    tmp.speedY = Math.random()*20 - 10;
+                                    tmp.speedX = Math.random()*10 - 5;
+                                    tmp.speedY = Math.random()*10 - 5;
+                                    tmp.isOut = false; //화면을 벗어 났는지 여부
                                     //배열에 누적시키기
                                     bubbles.push(tmp);
                               }
+
+                              //총에 맞았으니 토끼를 랜덤한 위치로 움직이게 하기
+                              rabbitX = Math.random()*700 + 50;
+                              rabbitY = Math.random()*400 + 50;
+                              //토끼 잡은 갯수 증가 시키기
+                              score++;
+                              //strong 요소의 innerText로 출력하기
+                              document.querySelector("#point").innerText = score * 100;
                         }
                   }
             )
