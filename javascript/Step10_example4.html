@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Step10_example4.html</title>
+</head>
+<body>
+      <input type="text" placeholder="번호입력..." id="inputNum">
+      <br>
+      <input type="text" placeholder="이름입력..." id="inputName">
+      <br>
+      <input type="text" placeholder="주소입력..." id="inputAddr">
+      <br>
+      <button id="saveBtn">저장</button>
+      <button id="deleteBtn">삭제</button>
+
+      <script>
+            //번호, 이름, 주소를 입력하고 저장버튼을 누르면 localStorage에 저장하고
+            //삭제 버튼을 누르면 localStorage에 저장된 정보를 삭제하고
+
+            //페이지 로딩 시점에 localStorage에 저장된 번호, 이름, 주소가 있다면
+            //위의 input 요소에 출력되도록 해보세요.
+            document.querySelector("#saveBtn").addEventListener("click",
+                  () => {
+                        // localStorage.num = document.querySelector("#inputNum").value;
+                        // localStorage.name = document.querySelector("#inputName").value;
+                        // localStorage.addr = document.querySelector("#inputAddr").value;
+                                          // "문자열을 실제 숫자로 바꾸어주는 함수"
+                        const num = Number(document.querySelector("#inputNum").value);
+                        const name = document.querySelector("#inputName").value;
+                        const addr = document.querySelector("#inputAddr").value;
+                        // obj = {num : num, name : name, addr : addr}
+                        const obj = {num, name, addr};
+                        localStorage.savedMember = JSON.stringify(obj);
+                  }
+            );
+            document.querySelector("#deleteBtn").addEventListener("click",
+                  () => {
+                        delete localStorage.savedMember;
+                  }
+            );
+            // JS의 조건문에서는 [만일 true이거나 빈값(0, null, ' ', undefined)이 아니면] 이라는 것을
+            // 자동으로 판별해주기 때문에 아래와 같이 작성할수도 있다.
+            if(localStorage.savedMember){
+                  // localStorage에 저장된 문자열을 이용해서 object를 만든다.
+                  const obj = JSON.parse(localStorage.savedMember)
+                  // object에 저장된 내용을 input 요소에 출력한다.
+                  document.querySelector("#inputNum").value = obj.num;
+                  document.querySelector("#inputName").value = obj.name;
+                  document.querySelector("#inputAddr").value = obj.addr;
+            };
+      </script>
+</body>
+</html>
