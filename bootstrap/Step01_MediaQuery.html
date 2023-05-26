@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Step01_MediaQuery.html</title>
+      <style>
+
+            /*
+                  아래의 media query의 중괄호 안에 작성한 css는 조건부로 적용된다
+                  (   ) 안의 조건이 true인 경우에만 적용된다.
+                  따라서 device의 폭이 최소 576px이상이 되어야 적용되고,
+                  576px 미만에서는 아무런 css가 적용되지 않는다.
+            */
+
+            @media(min-width: 576px){
+                  .bg-yellow{
+                        background-color: yellow;
+                  }
+            }
+            /*
+                  아래의 media query의 중괄호 안에 작성한 css는  device의 폭이 최소 768px이상이 되어야 적용된다.
+            */
+            @media(min-width: 768px){
+                  .bg-green{
+                        background-color: green;
+                  }
+            }
+
+            /*
+                  만약에 아래와 같이 선택자의 구체성이 같다고 하더라도 
+                  원본 css가 작성된 순서대로, 즉 아래에 작성된 선택자가 최종적으로 적용된다.
+            */
+
+            @media(min-width: 576px){
+                  .col-sm-6{
+                        width: 50%
+                  }
+            }
+            @media(min-width: 576px){
+                  .col-lg-6{
+                        width: 25%
+                  }
+            }
+
+            /*
+                  rem은 html 최상위 요소의 글자 크기를 의미
+                  따로 수정하지 않는 이상 16px
+                  즉, 1rem은 16px을 의미한다.
+
+                  padding, margin, width, height 등등 어떤 크기를 설정할 때
+                  16px 대신에 1rem 이렇게 설정할 수 있다.
+                  32px 대신에 2rem
+
+                  1.5rem 은 24px이다.
+            */
+
+      </style>
+</head>
+<body>
+      <p class="bg-yellow bg-green">p1입니다.</p>
+</body>
+</html>
