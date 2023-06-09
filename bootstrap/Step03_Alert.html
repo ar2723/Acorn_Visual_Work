@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Step03_Alert.html</title>
+      <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+      <div class="container">
+            <h1>알림 메세지</h1>
+            <p class="alert alert-success">
+                  성공적으로 작업이 끝났습니다.
+            </p>
+            <p class="alert alert-info">
+                  삭제했습니다.
+                  <a class="alert-link" href="#">확인</a>
+            </p>
+            <p class="alert alert-warning" id="myAlert">
+                  <strong>Oops!</strong>
+                  작업이 실패 했습니다.
+                  <button id="closeBtn" class="btn-close"></button>
+            </p>
+            <p>
+                  bootstrap javascript 를 로딩하고
+                  data-bs-xxx 속성을 적절히 추가하면 자동으로 동작하는 UI가 있다.
+            </p>
+            <p class="alert alert-danger alert-dismissible">
+                  <strong>Oops!</strong>
+                  작업이 실패 했습니다.
+                  <button class="btn-close" data-bs-dismiss="alert"></button>
+            </p>
+            <P data-msg="hello">어쩌구... 저쩌구...</P>
+            <button id="testBtn">테스트</button>
+            <!-- 
+                  프로그래밍 중에 사용자의 필요에 따라 속성에 어떤 값을 임의로 담아놓고, 
+                  스크립트에서 따로 사용할 수 있다. 
+            -->
+            <button id="testBtn2" data-num = "10">테스트</button>
+            <button id="testBtn3" data-num = "20">테스트</button>
+      </div>
+      <!-- bootstrap javascript 로딩 -->
+      <script src="js/bootstrap.bundle.js"></script>
+      <script>
+            document.querySelector("#closeBtn").addEventListener("click", (e)=>{
+                  document.querySelector("#myAlert").style.display = "none";
+            });
+
+            document.querySelector("#testBtn").addEventListener("click", ()=>{
+                  const str = document.querySelector("[data-msg=hello]").innerText;
+                  alert(str);
+            });
+
+            document.querySelector("#testBtn2").addEventListener("click", (e)=>{
+                  const num = e.target.getAttribute("data-num");
+                  alert(num);
+            });
+
+            document.querySelector("#testBtn3").addEventListener("click", (e)=>{
+                  const num = e.target.getAttribute("data-num");
+                  alert(num);
+            });
+            
+      </script>
+</body>
+</html>
