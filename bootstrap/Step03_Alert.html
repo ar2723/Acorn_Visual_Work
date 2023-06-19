@@ -34,7 +34,7 @@
             <P data-msg="hello">어쩌구... 저쩌구...</P>
             <button id="testBtn">테스트</button>
             <!-- 
-                  프로그래밍 중에 사용자의 필요에 따라 속성에 어떤 값을 임의로 담아놓고, 
+                  프로그래밍 중에 개발자의 필요에 따라 속성에 어떤 값을 임의로 담아놓고, 
                   스크립트에서 따로 사용할 수 있다. 
             -->
             <button id="testBtn2" data-num = "10">테스트</button>
@@ -48,6 +48,7 @@
             });
 
             document.querySelector("#testBtn").addEventListener("click", ()=>{
+                                                                              // 속성 선택자
                   const str = document.querySelector("[data-msg=hello]").innerText;
                   alert(str);
             });
