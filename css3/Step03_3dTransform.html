@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step03_3dTransform.html</title>
+    <style>
+        .wrapper{
+            /* viewer와 object 사이의 거리 */
+            /* 거리에 따라 transform 했을 때 객체가 변하는 량, 입체감이 달라지게 된다 */
+            perspective: 500px;
+            /* viewer의 위치 */
+            /* 
+                사용자의 시선의 위치를 의미하며, 비율에 따라 어느정도로 치우칠 수 있다.
+                첫번째 값은 x축의 값, 두번째 값은 y축의 값이다. (기준점은 좌상단 꼭지점)
+            */
+            perspective-origin: 50% 50%;
+            border: 1px solid blue;
+            height: 400px;
+            padding-top: 100px;
+        }
+        .target{
+            margin: 0 auto;
+            width: 200px;
+            border: 1px solid red;
+            /* 3d transform을 하기위한 css 설정 */
+            transform-style: preserve-3d;
+            /* x, y, z 축이 교차하는 원점(좌표) 설정 */
+            transform-origin: 50% 50%;
+            transition: transform 0.4s ease-out;
+        }
+        .target img{
+            max-width: 100%;
+        }
+        /* 기본 회전 방향은 시계방향(+)이고 시계 반대 방향(-)도 가능하다. */
+        #one:hover{
+            /* 회전 축이 가로 */
+            transform: rotateX(45deg);
+        }
+        #two:hover{
+            /* 회전 축이 세로 */
+            transform: rotateY(45deg);
+        }
+        #three:hover{
+            /* 회전 축이 정면 */
+            transform: rotateZ(45deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>3d transform 테스트</h3>
+        <!-- 3d 공간을 만들 wrapper div -->
+        <div class="wrapper">
+            <!-- 3d transform 을 할 아이템-->
+            <div class="target" id="one">
+                <img src="images/image1.png"/>
+            </div>
+        </div>
+        <div class="wrapper">
+            <!-- 3d transform 을 할 아이템-->
+            <div class="target" id="two">
+                <img src="images/image2.png"/>
+            </div>
+        </div>
+        <div class="wrapper">
+            <!-- 3d transform 을 할 아이템-->
+            <div class="target" id="three">
+                <img src="images/image3.png"/>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

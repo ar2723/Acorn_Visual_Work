@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step04_Cube3.html</title>
+    <style>
+        .wrapper{
+            perspective: 500px;
+            perspective-origin: 50% 50%;
+        }
+        .cube{
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            transform-style: preserve-3d;
+            transform-origin: 50% 50%;
+            transform: translateZ(-300px);
+            transition: transform 1s ease-out;
+        }
+        .cube > div{
+            border: 1px solid red;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 400px;
+            height: 400px;
+            background-color: antiquewhite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 100px;
+            font-weight: bold;
+            opacity: 0.5;
+        }
+        .cube:hover{
+            transition: transform 1s ease-in-out;
+            transform: translateZ(-200px) rotateX(45deg) rotateY(45deg);
+        }
+        .nav{
+            display: flex;
+            justify-content: center;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>3d cube 테스트</h3>
+        <div class="wrapper">
+            <div class="cube">
+ 
+            </div>
+        </div>
+        <div class="nav">
+            <button id="leftBtn">&larr;</button>
+            <button id="rightBtn">&rarr;</button>
+        </div>
+    </div>
+    <script>
+        // div의 갯수가 4개이니깐 반복문 4번 돌기
+        for(let i=1; i<=4; i++){
+            // div를 만들어서
+            const div = document.createElement("div");
+            // innerText를 출력하고
+            div.innerText = i;
+            // .cube에 추가하기
+            document.querySelector(".cube").append(div)
+        }
+        // .cube 안에 있는 모든 div의 참조값을 배열로 얻어내기
+        const items = document.querySelectorAll(".cube div")
+        // 반복문 돌면서 모든 div에 transform 적용하기
+        for(let i=0; i<items.length; i++){
+            items[i].style.transform = `rotateY(${90*i}deg) translateZ(200px)`
+        }
+
+        const cube = document.querySelector(".cube")
+        let num = 0;
+        document.querySelector("#leftBtn").addEventListener("click", ()=>{
+            num -= 90;
+            cube.style.transform = `translateZ(-200px) rotateY(${num}deg)`;
+        })
+        document.querySelector("#rightBtn").addEventListener("click", ()=>{
+            num += 90;
+            cube.style.transform = `translateZ(-200px) rotateY(${num}deg)`;
+        })
+    </script>
+</body>
+</html>
