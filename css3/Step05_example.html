@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step05_example.html</title>
+</head>
+<style>
+    .main-nav{
+        background-color: red;
+        color: white;
+        border-radius: 5px;
+        /* 
+            root 요소(html)의 글자 크기를 1 rem 이라고 한다.
+            글자 크기를 지정하지 않으면 글자 크기는 기본 16px이 된다.
+        */
+        padding: 1rem;
+        /* ul 요소와 form 요소를 가로로 배치하기 위해 */
+        display: flex;
+        justify-content: space-between;
+    }
+    .main-nav ul{
+        /* ul의 자식 요소를 가로로 배치하기 */
+        display: flex;
+        align-items: center;
+        column-gap: 1rem;
+        text-decoration: none;
+        padding: 0;
+        margin: 0;
+        /* ul의 기본 스타일 제거 */
+        list-style-type: none;
+        flex: 1;
+    }
+    li a{
+        color: white;
+        /* a 요소의 밑줄 제거 */
+        text-decoration: none;
+        font-weight: 500;
+    }
+    li a:hover{
+        text-decoration: underline;
+    }
+    /* 
+        반응형 레이아웃 
+        device의 폭이 최대 575px 일때까지만 적용할 css
+    */
+    @media(max-width: 575px){
+        .main-nav{
+            flex-direction: column;
+        }
+
+        form{
+            margin-top: 10px;
+        }
+
+        .main-nav ul{
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+    form{
+        display: flex;
+        flex: 1;
+    }
+    input{
+        flex: 1;
+    }
+    button{
+        background-color: white;
+        color: orangered;
+        border: 0;
+        border-radius: 5px;
+        margin-left: 1rem;
+    }
+</style>
+<body>
+    <nav class="main-nav">
+        <ul>
+            <li><a href="#">Logo</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Study</a></li>
+            <li><a href="#">Contacts</a></li>
+        </ul>
+        <form action="">
+            <input type="text" placeholder="검색어 입력...">
+            <button>Search</button>
+        </form>
+    </nav>
+</body>
+</html>
